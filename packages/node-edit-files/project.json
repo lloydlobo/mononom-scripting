@@ -1,0 +1,52 @@
+{
+  "sourceRoot": "packages/node-edit-files/src",
+  "projectType": "application",
+  "type": "module",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/node-edit-files",
+        "main": "packages/node-edit-files/src/main.ts",
+        "tsConfig": "packages/node-edit-files/tsconfig.app.json",
+        "assets": ["packages/node-edit-files/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/node-edit-files/src/environments/environment.ts",
+              "with": "packages/node-edit-files/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "node-edit-files:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/node-edit-files/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/node-edit-files"],
+      "options": {
+        "jestConfig": "packages/node-edit-files/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
