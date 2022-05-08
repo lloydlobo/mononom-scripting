@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "lazy-workflow": "packages/lazy-workflow",
+    "memoize-factorial": "packages/memoize-factorial",
     "node-edit-files": "packages/node-edit-files"
   }
 }

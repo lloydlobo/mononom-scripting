@@ -1,0 +1,51 @@
+{
+  "sourceRoot": "packages/memoize-factorial/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/memoize-factorial",
+        "main": "packages/memoize-factorial/src/main.ts",
+        "tsConfig": "packages/memoize-factorial/tsconfig.app.json",
+        "assets": ["packages/memoize-factorial/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/memoize-factorial/src/environments/environment.ts",
+              "with": "packages/memoize-factorial/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "memoize-factorial:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/memoize-factorial/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/memoize-factorial"],
+      "options": {
+        "jestConfig": "packages/memoize-factorial/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

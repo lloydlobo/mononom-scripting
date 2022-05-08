@@ -1,0 +1,51 @@
+{
+  "sourceRoot": "packages/lazy-workflow/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/lazy-workflow",
+        "main": "packages/lazy-workflow/src/main.ts",
+        "tsConfig": "packages/lazy-workflow/tsconfig.app.json",
+        "assets": ["packages/lazy-workflow/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/lazy-workflow/src/environments/environment.ts",
+              "with": "packages/lazy-workflow/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "lazy-workflow:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/lazy-workflow/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/lazy-workflow"],
+      "options": {
+        "jestConfig": "packages/lazy-workflow/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
