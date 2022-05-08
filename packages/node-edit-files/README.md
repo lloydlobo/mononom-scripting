@@ -1,0 +1,8 @@
+# Movie Script Edit Files
+
+## Feynman Technique
+
+- CHOOSE A TOPIC
+- EXPLAIN IT TO A 12 YEAR OLD
+- REFLECT, REFINE, SIMPLIFY
+- ORGANIZE & REVIEW
