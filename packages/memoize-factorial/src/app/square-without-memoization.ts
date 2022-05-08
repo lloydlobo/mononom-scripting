@@ -12,16 +12,16 @@ async function sleep(ms = 100) {
  * @param {number} number - The number to be squared.
  * @returns The number of times the number is.
  */
-function square(number: number) {
+async function square(number: number) {
   let result: null | number = 0;
   /* A nested loop. */
   for (let i = 0; i < number; i += 1) {
     // console.log(chalk.bgGreen(`i: ${i} => result: ${result}`));
-    // await sleep();
+    await sleep();
     /* A loop that is executed the number of times the number is. */
     for (let j = 0; j < number; j++) {
       // console.log(chalk.blue(`j: ${j} => result: ${result}`));
-      // await sleep();
+      await sleep();
       result += 1;
       // console.log(chalk.red(`j: ${j}, i: ${i} => result++ => ${result}`));
     }
