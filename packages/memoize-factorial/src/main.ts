@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
+/**
+ * Importing chalk module to color the console and
+ * Importing the inquirer package, and then it's calling the promptUser function, which returns a promise, and then it's assigning the result of the promise to the length variable. It's calling the runExecuteAll function, which takes a number as an argument, and then it's logging the length of the fibonacci sequence in the console.
+ * */
+
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import { arrayBuffer } from 'stream/consumers';
 
 // Memoize fibonacci series using memoize decorator
 /**
