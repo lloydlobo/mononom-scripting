@@ -2,6 +2,7 @@
 
 import chalk from 'chalk';
 import inquirer from 'inquirer';
+import { arrayBuffer } from 'stream/consumers';
 
 // Memoize fibonacci series using memoize decorator
 /**
@@ -157,11 +158,16 @@ async function displayResutStats(length: number): Promise<void> {
   // sum in fibonacci sequence
   const fibonacciSort = fibonacci.sort((a, b) => a - b);
   console.log({ fibonacciSort });
-  const sum = fibonacciSort.reduce((a, b) => {
-    console.log({ a, b });
-    const sum = a + b;
-    return sum;
-  });
+  let currentindex = 0;
+  const sum = fibonacciSort.reduce((acc, curr) => {
+    if (currentindex === 0) {
+      currentindex++;
+      return acc + curr;
+    } else {
+      currentindex++;
+      return acc + curr;
+    }
+  }, 0);
   await sleepHelper();
   console.log(`\nThe sum of the fibonacci sequence is ${sum}`);
   await sleepHelper();
