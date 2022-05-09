@@ -201,6 +201,9 @@ async function postUserFibonacciResult(): Promise<void> {
   process.exit(0);
 }
 
+/**
+ * It sorts an array, then maps over it, then filters it, then logs it
+ */
 async function manipulateArray() {
   const array = [11, 2, 22, 1];
   console.log({ array });
@@ -211,16 +214,20 @@ async function manipulateArray() {
   arraySorted.map((item, index) => {
     console.log({ item, index });
   });
-  await sleepHelper();
-  console.log({ arraySorted });
-  arraySorted.filter((item, index) => {
-    console.log({ item, index });
-  });
-  await sleepHelper();
-  console.log({ arraySorted });
+  // await sleepHelper();
+  // console.log({ arraySorted });
+  // arraySorted.filter((item, index) => {
+  //   console.log({ item, index });
+  // });
+  // await sleepHelper();
+  // console.log({ arraySorted });
   await sleepHelper();
 }
 
+/**
+ * It's calling the promptUser function, which returns a promise,
+ * and then it's logging the length of the fibonacci sequence
+ */
 async function main() {
   await sleepHelper();
   await manipulateArray();
