@@ -202,21 +202,51 @@ async function promptUser(): Promise<number> {
  * @returns The user's choice of action.
  */
 async function promptUserFileAction() {
-  return inquirer.prompt([
+  const fileAnswers = await inquirer.prompt([
     {
       type: 'list',
       name: 'action',
       message: 'What would you like to do?',
       choices: [
-        { name: 'Run the program', value: 'run' },
+        { name: 'Run the program again', value: 'run' },
         { name: 'Display the input text file', value: 'display' },
         { name: 'Write the output text file', value: 'write' },
         { name: 'Exit', value: 'exit' },
       ],
     },
   ]);
+  return runFileActions(fileAnswers.action);
 }
 
+async function runFileActions(action: string) {
+  switch (action) {
+    case 'run':
+      // await promptUser();
+      await main();
+      break;
+    case 'display':
+      // await displayFile();
+      await readFile(path.join(__dirname, './assets/output.txt')).then(
+        (data) => {
+          console.log({ data });
+        }
+      );
+      break;
+    case 'write':
+      // await writeFile();
+      await writeFile(
+        path.join(__dirname, './assets/output.txt'),
+        fibonacci.toString()
+      );
+      break;
+    case 'exit':
+      process.exit();
+      break;
+    default:
+      console.error('Something went wrong');
+      break;
+  }
+}
 // ----------------------------------------------------------------------------
 // --------------------------CONVERT FIBONACCI LOGIC RESULTS-------------------
 // ----------------------------------------------------------------------------
@@ -367,7 +397,8 @@ async function main() {
     path.join(__dirname, './assets/output.txt'),
     fibonacci.toString()
   );
-  process.exit(0);
+  await promptUserFileAction();
+  // process.exit(0);
 }
 
 /* The function that runs all. */
