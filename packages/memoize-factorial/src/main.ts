@@ -2,57 +2,50 @@
 
 /**
  * Importing chalk module to color the console and
- * Importing the inquirer package, and then it's calling the promptUser function, which returns a promise, and then it's assigning the result of the promise to the length variable. It's calling the runExecuteAll function, which takes a number as an argument, and then it's logging the length of the fibonacci sequence in the console.
+ * Importing the inquirer package, and calling the promptUser function, which returns a promise,
+ * and then it's assigning the result of the promise to the length variable.
+ * It's calling the runExecuteAll function, which takes a number as an argument,
+ * and then it's logging the length of the fibonacci sequence in the console.
  * */
 
 import chalk from 'chalk';
-import { createSpinner } from 'nanospinner';
+import { createSpinner, Spinner } from 'nanospinner';
 import inquirer from 'inquirer';
 import * as fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-// import { manipulateArray } from './manipulateArray';
-
-// ----------------------------------------------------------------------------
-// --------------------------OVERVIEW PROCESS----------------------------------
-// ----------------------------------------------------------------------------
-// Memoize fibonacci series using memoize decorator
-/**
- * It's taking the user's input and converting it to a number, it's calling the executeAll function,
- * which takes a number as an argument, and then it calls the forLoopFibonacci function, which returns
- * a promise, and then it calls the displayFibonacciResults function, which returns a promise, and then
- * it calls the sleepHelper function, which returns a promise, and then it logs the length of the cache
- * @param {number} length - number - The length of the fibonacci sequence.
- * @returns An array of numbers.
- */
-
-interface myInterface {
-  [index: number]: any;
-}
-
-// ----------------------------------------------------------------------------
+/* Defining the __filename and __dirname variables for the TypeScript compiler. */
+/* https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/ */
+const __filename = fileURLToPath(import.meta.url) as string;
+const __dirname = path.dirname(__filename);
 // --------------------------GLOBAL VARIABLES----------------------------------
 // ----------------------------------------------------------------------------
+
+/* Defining an interface that has an index signature. */
+interface myInterface {
+  [index: number]: number[];
+}
 
 /* Creating an empty array. */
 const cache: myInterface = [];
 
 /** Creating an empty array for Fibonnaci Sequence */
 let fibonacci: number[] = [];
+/* Declaring a variable called fibo and assigning it an empty array. */
+let fibo: number[] = [];
 
-// ----------------------------------------------------------------------------
 // --------------------------HELPER FUNCTIONS----------------------------------
 // ----------------------------------------------------------------------------
 
 // --------------------------SLEEP TIMEOUT-------------------------------------
 
+// prettier-ignore
 /**
- * SleepHelper is an async function that returns a promise
- * that resolves after a given number of milliseconds.
- * @param [ms=1000] - The number of milliseconds to wait before resolving the promise.
+ * This function returns a promise that resolves after a given number of milliseconds.
+ * @param  - { ms?: number; } = {}
  */
-// await () => setTimeout(resolve, ms))
-export async function sleepHelper(ms = 1000): Promise<void> {
+export async function sleepHelper({ ms = 200 }: { ms?: number; } = {}): Promise<void> {
   await new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
@@ -60,13 +53,18 @@ export async function sleepHelper(ms = 1000): Promise<void> {
 
 // --------------------------NANO SPINNER LOADING------------------------------
 
-const loading = async ({ ms = 1000 }: { ms?: number } = {}) => {
-  const spinner = createSpinner();
+/**
+ * It creates a spinner, starts it, waits for a specified amount of time, stops it, logs a new line.
+ * @param  - `ms` - The amount of time to wait before stopping the spinner.
+ */
+const loading = async ({ ms = 500 }: { ms?: number } = {}): Promise<void> => {
+  /* Creating a spinner. */
+  const spinner: Spinner = createSpinner();
   spinner.start({
     text: 'Loading...',
     color: 'red',
   });
-  await sleepHelper(ms);
+  await sleepHelper({ ms });
   spinner.stop({
     text: `Loaded in ${ms}ms!`,
     color: 'green',
@@ -92,8 +90,19 @@ const readFile = (filename: string): Promise<string> =>
  * It reads the input file, splits it into an array,
  * and returns the length of the array and the array itself
  */
-const readFileInput = async () =>
+export const readFileInput = async (): Promise<{
+  length: number;
+  resultSplit: string[];
+  resultSplitLength: number;
+}> =>
+  /* Reading the file and then printing the data. */
   await readFile(path.join(__dirname, './assets/input.txt')).then((data) => {
+    /**
+     * 1. Variable called result and assigning it the value of data.
+     * 2. Variable called length and assigning it the value of the length of the result variable.
+     * 3. Declaring a variable called resultSplit and assigning it the value of the result variable split into an array.
+     * 4. Declaring a variable called resultSplitLength and assigning it the value of the length of the resultSplit variable.
+     * */
     const result = data;
     const length = result.split('\n').length;
     const resultSplit = result.split('');
@@ -101,7 +110,6 @@ const readFileInput = async () =>
     return { length, resultSplit, resultSplitLength };
   });
 
-// ----------------------------------------------------------------------------
 // --------------------------FIBONACCI LOGIC-----------------------------------
 // ----------------------------------------------------------------------------
 
@@ -118,9 +126,11 @@ async function forLoopFibonacci(length: number): Promise<number[]> {
   /* Destructuring the array fibonnaciStartingDigits into two variables, start and end. */
   const fibonnaciStartingDigits: number[] = [0, 1];
   let [start, end] = fibonnaciStartingDigits;
+
+  /* Looping through the array and printing out the value of each element. */
   for (let i = 0; i < length; i++) {
     if (cache[length] != null) {
-      const caches = cache[length].toArray();
+      const caches = cache[length];
       return caches;
     } else if (i === 0) {
       /* Pushing the starting digits of the fibonacci sequence into the fibonacci array. */
@@ -139,17 +149,14 @@ async function forLoopFibonacci(length: number): Promise<number[]> {
 }
 
 /**
- * This function takes an array of numbers and displays the results in the console
- * @param {ArraySequence[]} fibo - ArraySequence[]
+ * It's logging the fibonacci sequence in the console
+ * @param  - { fibo }: { fibo: { fibo: number[]; }; }
  */
-type ArraySequence = unknown | never;
-async function displayFibonacciResults(fibo: ArraySequence[]): Promise<void> {
+// prettier-ignore
+const displayFibonacciResults = async ({ fibo }: { fibo: { fibo: number[]; }; }): Promise<void> => {
   /* It's logging the fibonacci sequence in the console. */
   try {
     console.log(chalk.red(`\nStart of Fibonacci Sequence`));
-    console.log(fibo);
-    console.log(fibo);
-    console.log(fibo);
     console.log(fibo);
     console.table(fibo);
     console.log(chalk.red(`\nEnd of Fibonacci Sequence`));
@@ -159,7 +166,6 @@ async function displayFibonacciResults(fibo: ArraySequence[]): Promise<void> {
   }
 }
 
-// ----------------------------------------------------------------------------
 // --------------------------INQUIRER USER PROMPTS-----------------------------
 // ----------------------------------------------------------------------------
 
@@ -203,56 +209,66 @@ async function promptUser(): Promise<number> {
 }
 
 /**
- * It prompts the user to choose an action to perform on the text file
- * @returns The user's choice of action.
+ * It prompts the user to choose an action to perform on the input and output files
+ * @returns the result of the promptRunFileActions function.
  */
-async function promptUserFileAction() {
+async function promptUserFileAction(): Promise<void> {
   const fileAnswers = await inquirer.prompt([
     {
       type: 'list',
       name: 'action',
       message: 'What would you like to do?',
       choices: [
-        { name: 'Run the program again', value: 'run' },
-        { name: 'Display the input text file', value: 'display' },
-        { name: 'Write the output text file', value: 'write' },
+        { name: 'Run the program again', value: 'restart_main' },
+        { name: 'Display the input text file', value: 'display_input' },
+        { name: 'Display the output', value: 'display_output_log' },
+        { name: 'Write to the output text file', value: 'write_output' },
         { name: 'Exit', value: 'exit' },
       ],
     },
   ]);
-  return runFileActions(fileAnswers.action);
+  return promptRunFileActions(fileAnswers.action);
 }
 
-async function runFileActions(action: string) {
+/**
+ * It takes a string as an argument, and depending on the value of the string, it will either restart
+ * the main function, display the input file, display the output file, write the output file, or exit
+ * the program
+ * @param {string} action - string
+ */
+async function promptRunFileActions(action: string): Promise<void> {
   switch (action) {
-    case 'run':
-      // await promptUser();
+    case 'restart_main':
       await main();
       break;
-    case 'display':
-      // await displayFile();
+    case 'display_input':
+      await readFile(path.join(__dirname, './assets/input.txt')).then(
+        (data) => {
+          console.log(data);
+        }
+      );
+      break;
+    case 'display_output_log':
       await readFile(path.join(__dirname, './assets/output.txt')).then(
         (data) => {
           console.log({ data });
         }
       );
       break;
-    case 'write':
-      // await writeFile();
+    case 'write_output':
       await writeFile(
         path.join(__dirname, './assets/output.txt'),
-        fibonacci.toString()
+        fibo.toString()
       );
       break;
     case 'exit':
-      process.exit();
+      process.exit(0);
       break;
     default:
       console.error('Something went wrong');
       break;
   }
 }
-// ----------------------------------------------------------------------------
 // --------------------------CONVERT FIBONACCI LOGIC RESULTS-------------------
 // ----------------------------------------------------------------------------
 
@@ -304,26 +320,29 @@ async function displayResutStats(length: number): Promise<void> {
   // process.exit();
 }
 
-// ----------------------------------------------------------------------------
 // --------------------------RUN FIBONACCI LOGIC & DISPLAY---------------------
 // ----------------------------------------------------------------------------
 
 /**
- * It's logging the length of the fibonacci sequence
- * @param {number} length - number - The length of the fibonacci sequence.
+ * It calls the executeAll function, which returns a promise, and then calls the
+ * displayFibonacciResults function, which returns a promise, and then calls the sleepHelper function,
+ * which returns a promise, and then calls the displayResutStats function, which returns a promise
+ * @param {number} length - The number of fibonacci numbers to generate.
+ * @returns The fibonacci sequence
  */
-async function runExecuteAll(length: number): Promise<void> {
+async function runExecuteAll(length: number): Promise<number[]> {
   try {
-    const fibo = await executeAll(length);
-    await displayFibonacciResults(fibo);
+    fibo = await executeAll(length);
+    await displayFibonacciResults({ fibo: { fibo } });
     await sleepHelper();
     await displayResutStats(length);
+    return fibo;
   } catch (error) {
     console.error(error);
   }
+  return fibo;
 }
 
-// ----------------------------------------------------------------------------
 // --------------------------PROMPT USER FOR FIBONACCI SERVICE-----------------
 // ----------------------------------------------------------------------------
 
@@ -333,25 +352,6 @@ async function postUserFibonacciResult(): Promise<number> {
   const length: number = await promptUser();
   await runExecuteAll(length);
   return length;
-}
-
-// ----------------------------------------------------------------------------
-// --------------------------FILE SYSTEM READ/WRITE----------------------------
-// ----------------------------------------------------------------------------
-
-/**
- * The function `displayInputTextData` is an asynchronous function that returns a promise of type
- * `void`
- */
-async function displayInputTextData(): Promise<void> {
-  const resultReadFileInput = await readFileInput()
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  console.log({ read_input: resultReadFileInput });
 }
 
 /**
@@ -371,8 +371,8 @@ async function writeFile(filename: string, data: string | Buffer): Promise<void>
   });
 }
 
-// ----------------------------------------------------------------------------
 // --------------------------MAIN FUNCTION ------------------------------------
+// ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 
 /**
@@ -380,29 +380,21 @@ async function writeFile(filename: string, data: string | Buffer): Promise<void>
  * and then it's logging the length of the fibonacci sequence
  */
 async function main() {
-  await loading({ ms: 1000 });
-
   console.clear();
-  await loading({ ms: 1000 });
-
-  await displayInputTextData();
   await postUserFibonacciResult();
+  // await readFile(path.join(__dirname, './assets/output.txt')).then((data) => {
+  //   console.log({ data });
+  // });
   await loading({ ms: 1000 });
-
-  await readFile(path.join(__dirname, './assets/output.txt')).then((data) => {
-    console.log({ data });
-  });
-
-  await loading({ ms: 1000 });
-
   await promptUserFileAction();
-  await loading({ ms: 1000 });
-
+  await writeFile(path.join(__dirname, './assets/output.txt'), fibo.toString());
   await writeFile(
-    path.join(__dirname, './assets/output.txt'),
+    path.join(__dirname, './assets/cache.txt'),
     fibonacci.toString()
   );
+  await loading({ ms: 1000 });
   await promptUserFileAction();
+  await loading({ ms: 1000 });
   // process.exit(0);
 }
 

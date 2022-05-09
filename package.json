@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
+  "type": "commonjs",
   "devDependencies": {
     "@nrwl/cli": "14.1.4",
     "@nrwl/eslint-plugin-nx": "14.1.4",

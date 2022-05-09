@@ -3,6 +3,10 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "types": [
       "node"
     ]

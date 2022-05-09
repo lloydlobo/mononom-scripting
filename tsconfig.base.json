@@ -19,6 +19,7 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    
     "paths": {}
   },
   "exclude": [
