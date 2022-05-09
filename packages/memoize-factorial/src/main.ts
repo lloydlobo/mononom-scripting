@@ -26,15 +26,19 @@ import path from 'path';
  * @returns An array of numbers.
  */
 
+interface myInterface {
+  [index: number]: any;
+}
+
 // ----------------------------------------------------------------------------
 // --------------------------GLOBAL VARIABLES----------------------------------
 // ----------------------------------------------------------------------------
 
 /* Creating an empty array. */
-const cache = [];
+const cache: myInterface = [];
 
 /** Creating an empty array for Fibonnaci Sequence */
-let fibonacci = [];
+let fibonacci: number[] = [];
 
 // ----------------------------------------------------------------------------
 // --------------------------HELPER FUNCTIONS----------------------------------
@@ -110,13 +114,14 @@ const readFileInput = async () =>
  * @param {number} length - number - The length of the fibonacci sequence.
  * @returns An array of numbers.
  */
-async function forLoopFibonacci(length: number): Promise<ArraySequence[]> {
+async function forLoopFibonacci(length: number): Promise<number[]> {
   /* Destructuring the array fibonnaciStartingDigits into two variables, start and end. */
   const fibonnaciStartingDigits: number[] = [0, 1];
   let [start, end] = fibonnaciStartingDigits;
   for (let i = 0; i < length; i++) {
     if (cache[length] != null) {
-      return cache[length];
+      const caches = cache[length].toArray();
+      return caches;
     } else if (i === 0) {
       /* Pushing the starting digits of the fibonacci sequence into the fibonacci array. */
       fibonacci.push(start, end);

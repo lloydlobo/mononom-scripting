@@ -23,14 +23,21 @@ const lineBreak = () => console.log(`\n`);
  */
 const add = (n: number) => n + 10;
 add(9);
+
+interface myInterface {
+  [index: number]: string | number;
+  myVal?: string;
+  cache?: number;
+}
+
 /**
  * It returns a function that takes a number or string and returns the number plus 10, but if the
  * number or string has already been passed in, it returns the result from the cache
  * @returns A function that takes a number or string and returns the number plus 10.
  */
-const memoizedAdd: () => (n: string | number) => unknown = () => {
-  const cache: unknown[] = [];
-  return (n: string | number) => {
+const memoizedAdd = () => {
+  const cache: myInterface = [];
+  return (n: number) => {
     if (n in cache) {
       console.time('memoizedAdd');
       lineBreak();
@@ -41,7 +48,7 @@ const memoizedAdd: () => (n: string | number) => unknown = () => {
       lineBreak();
       console.time('calculateAdd');
       console.log('Calculating cache...');
-      const result: number = Number(n) + 10;
+      const result: number = n + 10;
       cache[n] = result;
       console.timeEnd('calculateAdd');
       return result;

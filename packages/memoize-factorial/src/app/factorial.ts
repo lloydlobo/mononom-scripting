@@ -4,7 +4,7 @@
  * @param {number} n - number - The number we want to calculate the factorial of.
  * @returns The factorial of the number.
  */
-function factorial(n: number): number {
+/* function factorial(n: number): number {
   if (n === 0) {
     return 1;
   } else {
@@ -36,3 +36,4 @@ async function main() {
   }
 }
 main();
+ */
