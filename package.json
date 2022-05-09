@@ -29,6 +29,7 @@
   "dependencies": {
     "faker": "^5.5.3",
     "inquirer": "^8.2.4",
+    "nanospinner": "^1.1.0",
     "tslib": "^2.3.0"
   }
 }
