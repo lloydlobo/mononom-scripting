@@ -1,16 +1,17 @@
-console.log('Hello World!');
-
 import open from 'open';
 
 const urls: string[] = [
-  'https://www.reddit.com/',
-  'https://9gag.com/',
-  'https://www.nytimes.com/',
-  'https://www.reuters.com/',
+  'https://developer.mozilla.org/en-US/',
+  'https://eloquentjavascript.net/',
+  'https://doc.rust-lang.org/book/',
 ];
 
-for (const url of urls) {
-  open(url, { app: { name: 'google chrome' } });
+async function main(): Promise<void> {
+  for (const url of urls) {
+    await open(url, { wait: false }).catch((err) => {
+      console.error(err);
+    });
+  }
 }
 
-open('/Applications/Spotify.app/Contents/MacOS/Spotify');
+main();
