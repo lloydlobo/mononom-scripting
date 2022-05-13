@@ -1,0 +1,17 @@
+  {
+    "opensource": [
+      "https://changelog.com/nightly/",
+      "https://nodeweekly.com/"
+    ],
+    "javascript": [
+      "https://developer.mozilla.org/en-US/",
+      "https://eloquentjavascript.net/",
+      "https://www.theodinproject.com/paths/full-stack-javascript?"
+    ],
+    "rust": [
+      "https://doc.rust-lang.org/stable/book/",
+      "https://doc.rust-lang.org/nightly/",
+      "https://rustbyexample.com/",
+      "https://rust-lang-nursery.github.io/rust-by-example/"
+    ]
+  }
