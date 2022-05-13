@@ -1,9 +1,11 @@
 {
   "version": 2,
   "projects": {
+    "apps-mononom-stringman": "packages/apps/mononom-stringman",
     "lazy-workflow": "packages/lazy-workflow",
+    "lib-string": "packages/lib/string",
     "memoize-factorial": "packages/memoize-factorial",
     "node-edit-files": "packages/node-edit-files",
-    "node-stringman": "packages/node-stringman"
+    "npm-minimal": "packages/npm-minimal"
   }
 }

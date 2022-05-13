@@ -1,0 +1,51 @@
+{
+  "sourceRoot": "packages/apps/mononom-stringman/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/apps/mononom-stringman",
+        "main": "packages/apps/mononom-stringman/src/main.ts",
+        "tsConfig": "packages/apps/mononom-stringman/tsconfig.app.json",
+        "assets": ["packages/apps/mononom-stringman/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/apps/mononom-stringman/src/environments/environment.ts",
+              "with": "packages/apps/mononom-stringman/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "apps-mononom-stringman:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/apps/mononom-stringman/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/apps/mononom-stringman"],
+      "options": {
+        "jestConfig": "packages/apps/mononom-stringman/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

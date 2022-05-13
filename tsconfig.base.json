@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "paths": {}
+    "paths": {
+      "@scripting-js/lib/string": ["packages/lib/string/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"],
   "extends": "@tsconfig/recommended/tsconfig.json"
