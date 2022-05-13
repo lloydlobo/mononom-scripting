@@ -12,6 +12,6 @@
       "https://doc.rust-lang.org/stable/book/",
       "https://doc.rust-lang.org/nightly/",
       "https://rustbyexample.com/",
-      "https://rust-lang-nursery.github.io/rust-by-example/"
+      "https://doc.rust-lang.org/stable/rust-by-example"
     ]
   }
