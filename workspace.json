@@ -6,6 +6,7 @@
     "lib-string": "packages/lib/string",
     "memoize-factorial": "packages/memoize-factorial",
     "node-edit-files": "packages/node-edit-files",
+    "node-rename-file": "packages/node-rename-file",
     "npm-minimal": "packages/npm-minimal"
   }
 }

@@ -1,0 +1,62 @@
+{
+  "sourceRoot": "packages/node-rename-file/src",
+  "projectType": "application",
+  "type": "module",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/node-rename-file",
+        "main": "packages/node-rename-file/src/main.ts",
+        "tsConfig": "packages/node-rename-file/tsconfig.app.json",
+        "assets": [
+          "packages/node-rename-file/src/assets"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/node-rename-file/src/environments/environment.ts",
+              "with": "packages/node-rename-file/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "node-rename-file:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/node-rename-file/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/packages/node-rename-file"
+      ],
+      "options": {
+        "jestConfig": "packages/node-rename-file/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
