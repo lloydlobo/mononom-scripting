@@ -129,6 +129,7 @@ async function forLoopFibonacci(length: number): Promise<number[]> {
 
   /* Looping through the array and printing out the value of each element. */
   for (let i = 0; i < length; i++) {
+    /* Checking if the cache has a value for the length of the array. If it does, it returns the value. */
     if (cache[length] != null) {
       const caches = cache[length];
       return caches;
